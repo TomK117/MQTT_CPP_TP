@@ -26,15 +26,15 @@ public slots:
     void setClientPort(int p);
 
 private slots:
-    void OnButtonConnectClicked();
-    void OnButtonQuitClicked();
+    void on_ButtonConnect_clicked();
+    void on_buttonQuit_clicked();
     void updateLogStateChange();
 
     void brokerDisconnected();
 
-    void OnButtonPublishClicked();
+    void on_buttonPublish_clicked();
 
-    void OnButtonSubscribeClicked();
+    void on_buttonSubscribe_clicked();
 
 private:
     Ui::MainWindow *ui;

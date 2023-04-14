@@ -1,6 +1,3 @@
-// Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
 #include "mainwindow.h"
 #include "subscriptionwindow.h"
 #include "ui_mainwindow.h"
@@ -52,26 +49,26 @@ MainWindow::~MainWindow()
     qApp->quit();
 }
 
-void MainWindow::OnButtonConnectClicked()
+void MainWindow::on_ButtonConnect_clicked()
 {
     if (m_client->state() == QMqttClient::Disconnected) {
         ui->lineEditHost->setEnabled(false);
         ui->spinBoxPort->setEnabled(false);
         ui->lineEditUser->setEnabled(false);
         ui->lineEditPassword->setEnabled(false);
-        ui->buttonConnect->setText(tr("Disconnect"));
+        ui->ButtonConnect->setText(tr("Disconnect"));
         m_client->connectToHost();
     } else {
         ui->lineEditHost->setEnabled(true);
         ui->spinBoxPort->setEnabled(true);
         ui->lineEditUser->setEnabled(true);
         ui->lineEditPassword->setEnabled(true);
-        ui->buttonConnect->setText(tr("Connect"));
+        ui->ButtonConnect->setText(tr("Connect"));
         m_client->disconnectFromHost();
     }
 }
 
-void MainWindow::OnButtonQuitClicked()
+void MainWindow::on_buttonQuit_clicked()
 {
     QApplication::quit();
 }
@@ -91,7 +88,7 @@ void MainWindow::brokerDisconnected()
     ui->spinBoxPort->setEnabled(true);
     ui->lineEditUser->setEnabled(true);
     ui->lineEditPassword->setEnabled(true);
-    ui->buttonConnect->setText(tr("Connect"));
+    ui->ButtonConnect->setText(tr("Connect"));
 }
 
 void MainWindow::setClientPort(int p)
@@ -99,7 +96,7 @@ void MainWindow::setClientPort(int p)
     m_client->setPort(p);
 }
 
-void MainWindow::OnButtonPublishClicked()
+void MainWindow::on_buttonPublish_clicked()
 {
     if (m_client->publish(ui->lineEditTopic->text(),
                           ui->lineEditMessage->text().toUtf8(),
@@ -108,7 +105,7 @@ void MainWindow::OnButtonPublishClicked()
         QMessageBox::critical(this, QLatin1String("Error"), QLatin1String("Could not publish message"));
 }
 
-void MainWindow::OnButtonSubscribeClicked()
+void MainWindow::on_buttonSubscribe_clicked()
 {
     auto subscription = m_client->subscribe(ui->lineEditTopic->text(), ui->spinQoS->text().toUInt());
     if (!subscription) {
